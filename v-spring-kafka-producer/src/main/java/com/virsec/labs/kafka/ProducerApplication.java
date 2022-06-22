@@ -39,24 +39,24 @@ public class ProducerApplication {
         };
     }
 
-    @Bean
-    public NewTopic topic() {
-        return TopicBuilder.name("topic1")
-                .partitions(10)
-                .replicas(1)
-                .build();
-    }
-
-    @Bean
-    public ApplicationRunner runner(KafkaTemplate<String, String> template) {
-        return args -> {
-            String message_count = System.getenv("V_MESSAGE_COUNT");
-            int default_count = 10;
-            int count = (null == message_count || message_count.isBlank() || message_count.isEmpty()) ? default_count : Integer.parseInt(message_count);
-            for (int i=0; i < count; i++) {
-                template.send("topic1", "test" + i);
-            }
-        };
-    }
+//    @Bean
+//    public NewTopic topic() {
+//        return TopicBuilder.name("topic1")
+//                .partitions(10)
+//                .replicas(1)
+//                .build();
+//    }
+//
+//    @Bean
+//    public ApplicationRunner runner(KafkaTemplate<String, String> template) {
+//        return args -> {
+//            String message_count = System.getenv("V_MESSAGE_COUNT");
+//            int default_count = 10;
+//            int count = (null == message_count || message_count.isBlank() || message_count.isEmpty()) ? default_count : Integer.parseInt(message_count);
+//            for (int i=0; i < count; i++) {
+//                template.send("topic1", "test" + i);
+//            }
+//        };
+//    }
 
 }
