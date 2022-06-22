@@ -14,6 +14,8 @@ import org.springframework.kafka.config.TopicBuilder;
 
 @SpringBootApplication
 public class ConsumerApplication {
+    public final static String TOPIC_NAME = "keda-topic";
+    public final static String GROUP_ID = "keda-group";
 
     public static void main(String[] args) {
         SpringApplication.run(ConsumerApplication.class, args);
@@ -40,15 +42,23 @@ public class ConsumerApplication {
 
     @Bean
     public NewTopic topic() {
-        return TopicBuilder.name("topic1")
+        return TopicBuilder.name(TOPIC_NAME)
                 .partitions(10)
                 .replicas(1)
                 .build();
     }
 
-    @KafkaListener(id = "myId", topics = "topic1")
+    @KafkaListener(id = GROUP_ID, topics = TOPIC_NAME)
     public void listen(String in) {
-        System.out.println(in);
+        System.out.println("Received [" + in + "] ...");
+        try {
+            int sleep_for_seconds = 2;
+            System.out.println("Sleeping for [" + sleep_for_seconds + "] ...");
+            Thread.sleep(sleep_for_seconds * 1000);
+            System.out.println("Done sleeping for [" + sleep_for_seconds + "] ...");
+        } catch (Exception e) {
+        }
+        System.out.println("Done processing [" + in + "] ...");
     }
 
 }
