@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: v-spring-kafka-producer
+  name: v-spring-kafka-producer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: v-spring-kafka-producer
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: v-spring-kafka-producer
+    spec:
+      containers:
+      - image: v-labs/v-spring-kafka-producer
+        imagePullPolicy: Never
+        name: v-spring-kafka-producer
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: v-spring-kafka-producer
+  name: v-spring-kafka-producer
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: v-spring-kafka-producer
+  type: ClusterIP
+status:
+  loadBalancer: {}

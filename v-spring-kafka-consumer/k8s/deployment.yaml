@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: v-spring-kafka-consumer
+  name: v-spring-kafka-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: v-spring-kafka-consumer
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: v-spring-kafka-consumer
+    spec:
+      containers:
+      - image: v-labs/v-spring-kafka-consumer
+        imagePullPolicy: Never
+        name: v-spring-kafka-consumer
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: v-spring-kafka-consumer
+  name: v-spring-kafka-consumer
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: v-spring-kafka-consumer
+  type: ClusterIP
+status:
+  loadBalancer: {}
