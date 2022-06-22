@@ -33,10 +33,10 @@ metadata:
   name: v-spring-kafka-producer
 spec:
   ports:
-  - name: 8080-8080
-    port: 8080
+  - name: 9000-9000
+    port: 9000
     protocol: TCP
-    targetPort: 8080
+    targetPort: 9000
   selector:
     app: v-spring-kafka-producer
   type: ClusterIP

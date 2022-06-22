@@ -8,6 +8,9 @@ all:
 describe:
 	$(KUBECTL) cluster-info
 
+forward-port:
+	$(KUBECTL) port-forward service/v-spring-kafka-producer -n v-labs 9000:9000 --address='0.0.0.0'
+
 generate-k8s-deployment:
 	mkdir -p k8s
 	$(KUBECTL) create deployment v-spring-kafka-producer \
